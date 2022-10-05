@@ -32,7 +32,7 @@ Variables the User Will Have to Care About
 * `deblent_var`
   * Whether or not to deblend sources.
 * `plot_var`
-  * Purely for plotting purposes. In my experience 'linear' works better for radio images, and 'log' works better for optical images.
+  * Adjusts the scaling when plotting the image in the /reference folder to 'linear' or 'log'. In my experience 'linear' works better for radio images, and 'log' works better for optical images.
 
 Additionally, there is an option to focus in on a smaller region of the image rather than analyzing the entire image. This draws a box around a point and only analyzes the part of the image that's in the box.
 
@@ -53,7 +53,13 @@ Let's say you have 3 HST images in different optical-type bands that you'd like 
 Understanding the Output
 ---
 
-
+All results are saved to the /results folder. It will contain:
+* `output.txt`
+ * This contains all the fluxes for each source in each image. These are listed in three flavors 'small', 'medium' and 'large', which correspond to which kind of background aperture was used. The final reported flux is the mean of the three fluxes using the three different background apertures, and the final reported flux error is the standard deviation of the three different fluxes.
+* `Reference.pdf`
+ *  This is the Reference plot that pops up in each code run, saved for perusal.
+*  `Source_*.pdf`
+ *  These are the plots of each source mask used with the accompanying three background aperture masks.
 
 
 Quirks
