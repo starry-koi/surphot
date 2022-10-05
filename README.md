@@ -1,7 +1,7 @@
 Surphot
 ===
 
-Source detection and analysis using image noise levels. Specifically, uses a single 'reference image' (which the user has to put in the /reference folder) to find sources and source backgrounds, then uses those source and background masks to both calculate and estimate error on the source fluxes for each of the images in the \total folder (which the user also has to manually supply).
+Source detection and analysis using image noise levels. Specifically, uses a single 'reference image' (which the user has to put in the /reference folder) to find sources and source backgrounds, then uses those source and background masks to both calculate and estimate error on the source fluxes for each of the images in the /total folder (which the user also has to manually supply).
 
 
 Setup
@@ -25,14 +25,35 @@ A more in-depth walkthrough is available in the `surphot.py` code file, with com
 Variables the User Will Have to Care About
 ---
 
+* `sigma_source_id`
+  * What sigma level to use to identify sources. e.g., if `sigma_source_id` is set to 5, then the code will identify sources at 5 times the image's noise level.
+* `sigma_measure`
+  * What sigma level to use to measure the identified sources. Setting this to a different, lower value than `sigma_source_id` can be useful if you want to use a higher threshold for source detection to limit spurious detections, then relax to a lower threshold to ensure you're measuring the full extent of the source.
+* `deblent_var`
+  * Whether or not to deblend sources.
+* `plot_var`
+  * Purely for plotting purposes. In my experience 'linear' works better for radio images, and 'log' works better for optical images.
+
+Additionally, there is an option to focus in on a smaller region of the image rather than analyzing the entire image. This draws a box around a point and only analyzes the part of the image that's in the box.
+
+* `focused_var`
+  * Whether or not to focus in. 
+* `center`
+  * The center of the box, in sky coordinates (specifically degrees).
+* `box_side`
+  * The desired side length of the box, in arcseconds.
+
 
 A Sample Run
 ---
 
+Let's say you have 3 HST images in different optical-type bands that you'd like to analyze. You first copy the image you want to use for source detection into the /reference folder, then copy all three of the images into the /total folder. You run the code, and the Reference plot pops up. After inspecting it, you see that you're getting a spurious source detection, so you close the Reference plot and stop the code from running further. You go back and up the `sigma_source_id` variable to a higher value, then rerun the code. Again, the Reference plot pops up and while you're detecting only the sources you want to be, you're not measuring as much of the extent as you'd like to. So you close the Reference plot, stop the code from running, and adjust the `sigma_measure` variable down a bit. Rerunning the code and viewing the Reference plot, you see that everything looks the way you want it to look, so you click out of the plot and let the code run its course. 
 
 
 Understanding the Output
 ---
+
+
 
 
 Quirks
