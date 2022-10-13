@@ -1,3 +1,4 @@
-# Ignore any results folders and any .fits images
+# Ignore any results folders, .fits images, and config files
 results*/
 *.fits
+*.config
