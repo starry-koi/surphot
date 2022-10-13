@@ -25,6 +25,8 @@ A more in-depth walkthrough is available in the `surphot.py` code file, with com
 Variables the User Will Have to Care About
 ---
 
+All variables are assigned and explained in more detail in the `params.config` file; you will likely have to go into this file to change some of these variables before running the code. What follows is an overview:
+
 * `sigma_source_id`
   * What sigma level to use to identify sources. e.g., if `sigma_source_id` is set to 5, then the code will identify sources at 5 times the image's noise level.
 * `sigma_measure`
@@ -47,7 +49,7 @@ Additionally, there is an option to focus in on a smaller region of the image ra
 A Sample Run
 ---
 
-Let's say you have 3 HST images in different optical-type bands that you'd like to analyze. You first copy the image you want to use for source detection into the /reference folder, then copy all three of the images into the /total folder. You run the code, and the Reference plot pops up. After inspecting it, you see that you're getting a spurious source detection, so you close the Reference plot and stop the code from running further. You go back and up the `sigma_source_id` variable to a higher value, then rerun the code. Again, the Reference plot pops up and while you're detecting only the sources you want to be, you're not measuring as much of the extent as you'd like to. So you close the Reference plot, stop the code from running, and adjust the `sigma_measure` variable down a bit. Rerunning the code and viewing the Reference plot, you see that everything looks the way you want it to look, so you click out of the plot and let the code run its course. 
+Let's say you have 3 HST images in different optical-type bands that you'd like to analyze. You first delete the `placeholder.fits` files, copy the image you want to use for source detection into the /reference folder, then copy all three of the images into the /total folder. You run the code, and the Reference plot pops up. After inspecting it, you see that you're getting a spurious source detection, so you close the Reference plot and stop the code from running further. You go into the `params.config` file and change the value of the `sigma_source_id` variable to a higher value, then rerun the code. Again, the Reference plot pops up and while you're detecting only the sources you want to be, you're not measuring as much of the extent as you'd like to. So you close the Reference plot, stop the code from running, and adjust the `sigma_measure` variable down a bit. Rerunning the code and viewing the Reference plot, you see that everything looks the way you want it to look, so you click out of the plot and let the code run its course. 
 
 
 Understanding the Output
