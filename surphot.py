@@ -10,6 +10,7 @@ from py_scripts import robust_stats as rstats #robust statistics functions based
 from py_scripts import mask_enlarge as m
 import ds9norm
 import subprocess as sp
+import commentjson as cjson
 import os
 import sys
 from os import listdir
@@ -19,10 +20,11 @@ from astropy import stats
 from astropy import wcs
 from astropy.utils.exceptions import AstropyWarning
 from scipy import ndimage
+from distutils.util import strtobool
 
 #Author: Lilikoi Latimer
 #Created May 2018
-#Updated September 2022
+#Updated October 2022
 
 '''
 =========================================================================================
@@ -47,7 +49,7 @@ from scipy import ndimage
 
 - Have to MANUALLY set the reference and total images (in the respective folders).
 
-- Have to MANUALLY set (check VARIABLES section):
+- Have to MANUALLY set (check VARIABLES section, though should set in params.config):
 	- What sigma level to use for sigma-clipping 			(sigma_level)
 	- What sigma level to use for identifying sources 		(sigma_source_id)
 	- What sigma level to use for measuring sources			(sigma_measure)
@@ -144,6 +146,12 @@ results_path 	= os.getcwd() + "/results/"
 sp.run(["mkdir", "-p",  results_path])
 
 
+#We used to declare all the variables here in the script. The variables/parameters have since been
+#moved to the params.config file, and we just read the values in from that. The following
+#commented-out section was kept so that definitions of all the variables could still be found 
+#in the actual code (which is useful when editing the code, for example).
+
+'''
 ############ Sigma-level variables #############
 
 sigma_level 	= 3 			#What sigma level to use for sigma-clipping
@@ -251,6 +259,43 @@ ds9_contrast 	= 1.14583		#For plotting the reference image - since we're
 					#bias to here.
 
 ds9_bias 	= 0.46748		#Same as above.
+'''
+
+#Import all the variables from the params.config file. There are several variables that
+#are boolean True/False that need to be properly converted from a string to a bool value,
+#and there are two variables that need to be converted from a list to an array.
+with open('params.config', 'r') as paramfile:
+	
+	json_obj	= cjson.load(paramfile)
+	
+	sigma_level 	= json_obj['sigma_level']
+	sigma_source_id = json_obj['sigma_source_id']
+	sigma_measure	= json_obj['sigma_measure']
+			
+	focused_var	= bool(strtobool(json_obj['focused_var']))
+	center		= np.array(json_obj['center'])
+	box_side	= json_obj['box_side']
+
+	deblent_var	= bool(strtobool(json_obj['deblent_var']))
+	plot_var	= json_obj['plot_var']
+	show_plots	= bool(strtobool(json_obj['show_plots']))
+	bg_method 	= json_obj['bg_method']
+	print_option_1 	= json_obj['print_option_1']
+	savefig 	= json_obj['savefig']
+	print_type	= json_obj['print_type']
+				
+	pix_thresh 	= json_obj['pix_thresh']
+	pref_bg 	= np.array(json_obj['pref_bg'])
+	bg_fac_small	= json_obj['bg_fac_small']
+	bg_fac_large	= json_obj['bg_fac_large']
+	in_out_factor 	= json_obj['in_out_factor']
+	small_in_out	= json_obj['small_in_out']
+	large_in_out	= json_obj['large_in_out']
+	min_in_factor 	= json_obj['min_in_factor']
+	ap_step 	= json_obj['ap_step']
+	round_dec 	= json_obj['round_dec']
+	ds9_contrast	= json_obj['ds9_contrast']
+	ds9_bias	= json_obj['ds9_bias']
 
 
 #========================================================================================
