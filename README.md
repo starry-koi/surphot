@@ -57,11 +57,11 @@ Understanding the Output
 
 All results are saved to the /results folder. It will contain:
 * `output.txt`
- * This contains all the fluxes for each source in each image. These are listed in three flavors 'small', 'medium' and 'large', which correspond to which kind of background aperture was used. The final reported flux is the mean of the three fluxes using the three different background apertures, and the final reported flux error is the standard deviation of the three different fluxes.
+  * This contains all the fluxes for each source in each image. These are listed in three flavors 'small', 'medium' and 'large', which correspond to which kind of background aperture was used. The final reported flux is the mean of the three fluxes using the three different background apertures, and the final reported flux error is the standard deviation of the three different fluxes.
 * `Reference.pdf`
- *  This is the Reference plot that pops up in each code run, saved for perusal.
+  *  This is the Reference plot that pops up in each code run, saved for perusal.
 *  `Source_*.pdf`
- *  These are the plots of each source mask used with the accompanying three background aperture masks.
+   *  These are the plots of each source mask used with the accompanying three background aperture masks.
 
 
 Quirks
